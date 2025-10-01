@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Plexus Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS Styles */
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --dark-bg: #0f0f23;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-light: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Background with overlay */
+        .hero-bg {
+            background-image: url('https://plexusclub.github.io/assets/background_pc.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Mobile background */
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-image: url('https://plexusclub.github.io/assets/background_mobile.jpg');
+                background-attachment: scroll;
+            }
+        }
+
+        /* Animated gradient text */
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(90deg); }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.8), transparent);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Glass morphism cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        /* Pulse animation */
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
+            }
+        }
+
+        /* Interactive button effects */
+        .interactive-btn {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .interactive-btn:hover::before {
+            left: 100%;
+        }
+
+        .interactive-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Typing animation */
+        .typing-text {
+            border-right: 2px solid var(--primary-color);
+            animation: typing 3s steps(40) infinite, blink 1s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Stagger animation for cards */
+        .stagger-in {
+            animation: staggerIn 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes staggerIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Dark mode toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 10px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Parallax sections */
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Member cards */
+        .member-card {
+            perspective: 1000px;
+        }
+
+        .member-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .member-card:hover .member-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .member-card-front, .member-card-back {
+            backface-visibility: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+
+        .member-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Scroll animations */
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading animation */
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive text sizing */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            .hero-subtitle {
+                font-size: 1.25rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" onclick="toggleDarkMode()">
+        <i class="fas fa-moon text-white text-xl"></i>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="particle" style="top: 10%; left: 10%; width: 4px; height: 4px; animation-delay: 0s;"></div>
+        <div class="particle" style="top: 20%; left: 80%; width: 6px; height: 6px; animation-delay: 1s;"></div>
+        <div class="particle" style="top: 60%; left: 20%; width: 3px; height: 3px; animation-delay: 2s;"></div>
+        <div class="particle" style="top: 80%; left: 70%; width: 5px; height: 5px; animation-delay: 3s;"></div>
+        <div class="particle" style="top: 40%; left: 60%; width: 4px; height: 4px; animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative">
+        <div class="hero-content container mx-auto px-6 text-center">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="hero-title text-6xl md:text-8xl font-bold mb-6 gradient-text">
+                    PLEXUS CLUB
+                </h1>
+                <p class="hero-subtitle text-xl md:text-2xl mb-8 text-gray-300 typing-text">
+                    Empowering Innovation, Fostering Excellence
+                </p>
+                <button class="interactive-btn text-lg" onclick="scrollToSection('mission')">
+                    Discover Our Journey
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 bg-black bg-opacity-90 backdrop-blur-md z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-center space-x-8">
+                <a href="#mission" class="nav-link text-white hover:text-purple-400 transition-colors">Mission & Vision</a>
+                <a href="#roles" class="nav-link text-white hover:text-purple-400 transition-colors">Our Roles</a>
+                <a href="#coordinators" class="nav-link text-white hover:text-purple-400 transition-colors">Team</a>
+                <a href="#college" class="nav-link text-white hover:text-purple-400 transition-colors">College</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mission & Vision Section -->
+    <section id="mission" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-5xl font-bold gradient-text mb-6">Mission & Vision</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Driving innovation and excellence through collaborative learning and holistic development
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Objective -->
+                <div class="glass-card p-8 pulse-glow" data-aos="fade-right" data-aos-delay="200">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-bullseye text-5xl text-purple-400 mb-4"></i>
+                        <h3 class="text-3xl font-bold text-white mb-4">Our Objective</h3>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        The Plexus Club aims to create a vibrant and inclusive community that fosters holistic student development through diverse opportunities in technical, non-technical, creative, and athletic domains. We prepare students for both professional excellence and personal growth through innovative collaboration and skill enhancement.
+                    </p>
+                </div>
+
+                <!-- Expected Outcomes -->
+                <div class="glass-card p-8" data-aos="fade-left" data-aos-delay="400">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-trophy text-5xl text-yellow-400 mb-4"></i>
+                        <h3 class="text-3xl font-bold text-white mb-4">Expected Outcomes</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-code text-blue-400"></i>
+                            <span class="text-gray-300">Enhanced Technical Proficiency</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-users text-green-400"></i>
+                            <span class="text-gray-300">Improved Leadership & Soft Skills</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-palette text-pink-400"></i>
+                            <span class="text-gray-300">Creative & Visual Innovation</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-gamepad text-red-400"></i>
+                            <span class="text-gray-300">Sports & Esports Excellence</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-handshake text-purple-400"></i>
+                            <span class="text-gray-300">Community Engagement</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roles & Responsibilities Section -->
+    <section id="roles" class="py-20 bg-gradient-to-b from-transparent to-purple-900 to-transparent">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-5xl font-bold gradient-text mb-6">Our Specialized Teams</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Six dynamic divisions working together to create extraordinary experiences
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Club Association -->
+                <div class="glass-card p-6 stagger-in" data-aos="zoom-in" data-aos-delay="100" style="animation-delay: 0.1s;">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-crown text-4xl text-yellow-400 mb-3"></i>
+                        <h3 class="text-2xl font-bold text-white">Club Association</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Central governing body overseeing all activities with strategic leadership and financial management.</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Event Oversight & Authorization</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Financial Administration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Club -->
+                <div class="glass-card p-6 stagger-in" data-aos="zoom-in" data-aos-delay="200" style="animation-delay: 0.2s;">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-laptop-code text-4xl text-blue-400 mb-3"></i>
+                        <h3 class="text-2xl font-bold text-white">Technical Club</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Engaging students in cutting-edge technology through hackathons, workshops, and innovation challenges.</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Hackathons & Workshops</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Industry Mentorship</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Non-Technical Club -->
+                <div class="glass-card p-6 stagger-in" data-aos="zoom-in" data-aos-delay="300" style="animation-delay: 0.3s;">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-theater-masks text-4xl text-green-400 mb-3"></i>
+                        <h3 class="text-2xl font-bold text-white">Non-Technical Club</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Enhancing soft skills through debates, cultural events, arts, and creative workshops.</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Debates & JAM Sessions</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Cultural Events & Arts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Team -->
+                <div class="glass-card p-6 stagger-in" data-aos="zoom-in" data-aos-delay="400" style="animation-delay: 0.4s;">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-share-alt text-4xl text-pink-400 mb-3"></i>
+                        <h3 class="text-2xl font-bold text-white">Social Media Team</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Managing digital presence and creating engaging content across all social platforms.</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Content Creation & Management</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Event Documentation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design Club -->
+                <div class="glass-card p-6 stagger-in" data-aos="zoom-in" data-aos-delay="500" style="animation-delay: 0.5s;">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-paint-brush text-4xl text-purple-400 mb-3"></i>
+                        <h3 class="text-2xl font-bold text-white">Design Club</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Creating stunning visual content, animations, and maintaining consistent brand identity.</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Graphic Design & Branding</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Video & Animation Production</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sports & Esports Club -->
+                <div class="glass-card p-6 stagger-in" data-aos="zoom-in" data-aos-delay="600" style="animation-delay: 0.6s;">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-medal text-4xl text-orange-400 mb-3"></i>
+                        <h3 class="text-2xl font-bold text-white">Sports & Esports</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Nurturing athletic talents in traditional sports and competitive gaming environments.</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Talent Development</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span class="text-gray-300">Tournament Organization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Active Coordinators Section -->
+    <section id="coordinators" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-5xl font-bold gradient-text mb-6">Our Leadership Team</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Meet the passionate individuals driving our mission forward
+                </p>
+            </div>
+
+            <!-- Current Leadership -->
+            <div class="mb-16">
+                <h3 class="text-3xl font-bold text-center text-white mb-12" data-aos="fade-up">Current Team</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- President Card -->
+                    <div class="member-card glass-card p-6" data-aos="flip-left" data-aos-delay="100">
+                        <div class="member-card-inner">
+                            <div class="member-card-front text-center">
+                                <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-crown text-3xl text-white"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-white mb-2">President</h4>
+                                <p class="text-gray-300 text-sm">Leading with vision and inspiring excellence across all club activities</p>
+                            </div>
+                            <div class="member-card-back glass-card p-6 text-center">
+                                <h4 class="text-lg font-bold text-white mb-4">Responsibilities</h4>
+                                <ul class="text-sm text-gray-300 space-y-2">
+                                    <li>• Strategic Leadership</li>
+                                    <li>• Meeting Facilitation</li>
+                                    <li>• External Relations</li>
+                                    <li>• Vision Implementation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vice President Card -->
+                    <div class="member-card glass-card p-6" data-aos="flip-left" data-aos-delay="200">
+                        <div class="member-card-inner">
+                            <div class="member-card-front text-center">
+                                <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user-tie text-3xl text-white"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-white mb-2">Vice President</h4>
+                                <p class="text-gray-300 text-sm">Supporting leadership and coordinating inter-club collaborations</p>
+                            </div>
+                            <div class="member-card-back glass-card p-6 text-center">
+                                <h4 class="text-lg font-bold text-white mb-4">Responsibilities</h4>
+                                <ul class="text-sm text-gray-300 space-y-2">
+                                    <li>• Supportive Leadership</li>
+                                    <li>• Event Coordination</li>
+                                    <li>• Committee Supervision</li>
+                                    <li>• Cross-club Collaboration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Faculty Coordinator Card -->
+                    <div class="member-card glass-card p-6" data-aos="flip-left" data-aos-delay="300">
+                        <div class="member-card-inner">
+                            <div class="member-card-front text-center">
+                                <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-r from-green-400 to-teal-400 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-chalkboard-teacher text-3xl text-white"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-white mb-2">Mr. R. VENKATESH</h4>
+                                <p class="text-gray-300 text-sm">Faculty Coordinator providing guidance and institutional support</p>
+                            </div>
+                            <div class="member-card-back glass-card p-6 text-center">
+                                <h4 class="text-lg font-bold text-white mb-4">Role</h4>
+                                <ul class="text-sm text-gray-300 space-y-2">
+                                    <li>• Academic Guidance</li>
+                                    <li>• Institutional Liaison</li>
+                                    <li>• Mentorship Support</li>
+                                    <li>• Policy Compliance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Previous Members Section -->
+            <div class="text-center" data-aos="fade-up">
+                <h3 class="text-3xl font-bold text-white mb-8">Previous Leadership</h3>
+                <p class="text-gray-300 mb-8">Honoring those who paved the way for our current success</p>
+                <button class="interactive-btn" onclick="showPreviousMembers()">
+                    <i class="fas fa-history mr-2"></i>
+                    View All Previous Members
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- College Vision & Mission -->
+    <section id="college" class="py-20 bg-gradient-to-b from-transparent via-blue-900 to-transparent">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-5xl font-bold gradient-text mb-6">Our Institution</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Building upon our college's foundation of excellence and innovation
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- College Vision -->
+                <div class="glass-card p-8" data-aos="fade-right" data-aos-delay="200">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-eye text-5xl text-blue-400 mb-4"></i>
+                        <h3 class="text-3xl font-bold text-white mb-4">College Vision</h3>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        To emerge as a Center of Excellence for producing professionals who shall be the leaders in technology innovation, entrepreneurship, management and in turn contribute for advancement of society and human kind.
+                    </p>
+                </div>
+
+                <!-- College Mission -->
+                <div class="glass-card p-8" data-aos="fade-left" data-aos-delay="400">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-rocket text-5xl text-purple-400 mb-4"></i>
+                        <h3 class="text-3xl font-bold text-white mb-4">College Mission</h3>
+                    </div>
+                    <div class="space-y-4 text-gray-300">
+                        <div class="flex items-start space-x-3">
+                            <span class="text-purple-400 font-bold">M1:</span>
+                            <span>To provide an environment of learning in emerging technologies.</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="text-purple-400 font-bold">M2:</span>
+                            <span>To nurture a state of art teaching learning process and R&D culture.</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="text-purple-400 font-bold">M3:</span>
+                            <span>To foster networking with Alumni, Industry, Institutes of repute and other stakeholders for effective interaction.</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="text-purple-400 font-bold">M4:</span>
+                            <span>To practice and promote high standards of ethical values through societal commitment.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-black bg-opacity-50 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Contact Info -->
+                <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="100">
+                    <h4 class="text-2xl font-bold text-white mb-4 gradient-text">Connect With Us</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-center md:justify-start space-x-3">
+                            <i class="fab fa-instagram text-pink-400"></i>
+                            <span class="text-gray-300">@plexusclub</span>
+                        </div>
+                        <div class="flex items-center justify-center md:justify-start space-x-3">
+                            <i class="fab fa-linkedin text-blue-400"></i>
+                            <span class="text-gray-300">Plexus Club</span>
+                        </div>
+                        <div class="flex items-center justify-center md:justify-start space-x-3">
+                            <i class="fab fa-github text-purple-400"></i>
+                            <span class="text-gray-300">plexusclub</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <h4 class="text-2xl font-bold text-white mb-4 gradient-text">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="#mission" class="block text-gray-300 hover:text-purple-400 transition-colors">Mission & Vision</a>
+                        <a href="#roles" class="block text-gray-300 hover:text-purple-400 transition-colors">Our Teams</a>
+                        <a href="#coordinators" class="block text-gray-300 hover:text-purple-400 transition-colors">Leadership</a>
+                        <a href="#college" class="block text-gray-300 hover:text-purple-400 transition-colors">Institution</a>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="text-center md:text-right" data-aos="fade-up" data-aos-delay="300">
+                    <h4 class="text-2xl font-bold text-white mb-4 gradient-text">Stay Updated</h4>
+                    <p class="text-gray-300 mb-4">Join our community for the latest updates and events</p>
+                    <button class="interactive-btn w-full md:w-auto" onclick="joinCommunity()">
+                        <i class="fas fa-bell mr-2"></i>
+                        Join Community
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 mb-4 md:mb-0">
+                        © 2024 Plexus Club. Empowering Innovation, Fostering Excellence.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-purple-400 transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-purple-400 transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-purple-400 transition-colors">Code of Conduct</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
+        <div class="text-center">
+            <div class="loading-spinner mx-auto mb-4"></div>
+            <p class="text-white text-xl">Loading Excellence...</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                mirror: false
+            });
+
+            // Hide loading overlay after page loads
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }, 2000);
+
+            // Add stagger animation to cards
+            const cards = document.querySelectorAll('.stagger-in');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                    card.classList.add('fade-in-up');
+                }, index * 100);
+            });
+        });
+
+        // Smooth scrolling function
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Navigation link smooth scrolling
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // Dark mode toggle (visual feedback only)
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.querySelector('.dark-mode-toggle i');
+            
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                body.classList.add('light-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+
+        // Previous members modal
+        function showPreviousMembers() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4';
+            modal.innerHTML = `
+                <div class="glass-card p-8 max-w-4xl w-full max-h-[80vh] overflow-y-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-3xl font-bold gradient-text">Previous Leadership Team</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-white hover:text-red-400 text-2xl">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="glass-card p-4 text-center">
+                            <div class="w-16 h-16 mx-auto mb-3 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-crown text-xl text-white"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">Previous President</h4>
+                            <p class="text-gray-300 text-sm">2023-2024 Term</p>
+                        </div>
+                        <div class="glass-card p-4 text-center">
+                            <div class="w-16 h-16 mx-auto mb-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user-tie text-xl text-white"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">Previous Vice President</h4>
+                            <p class="text-gray-300 text-sm">2023-2024 Term</p>
+                        </div>
+                        <div class="glass-card p-4 text-center">
+                            <div class="w-16 h-16 mx-auto mb-3 bg-gradient-to-r from-green-400 to-teal-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user-friends text-xl text-white"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">Previous Secretary</h4>
+                            <p class="text-gray-300 text-sm">2023-2024 Term</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-6">
+                        <p class="text-gray-300 mb-4">We honor all previous members who contributed to our growth and success.</p>
+                        <button class="interactive-btn" onclick="this.closest('.fixed').remove()">
+                            <i class="fas fa-heart mr-2"></i>
+                            Thank You All
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Join community function
+        function joinCommunity() {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 glass-card p-4 z-50 transform translate-x-full transition-transform duration-500';
+            notification.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-check-circle text-green-400 text-xl"></i>
+                    <span class="text-white">Thank you for your interest! We'll be in touch soon.</span>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero-bg');
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Interactive particles on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach((particle, index) => {
+                const speed = (index + 1) * 0.0001;
+                const x = (e.clientX * speed) % window.innerWidth;
+                const y = (e.clientY * speed) % window.innerHeight;
+                particle.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Typing animation for hero subtitle
+        const typingText = document.querySelector('.typing-text');
+        if (typingText) {
+            const text = typingText.textContent;
+            typingText.textContent = '';
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    typingText.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            setTimeout(typeWriter, 2000);
+        }
+
+        // Add scroll indicator
+        const scrollIndicator = document.createElement('div');
+        scrollIndicator.className = 'fixed bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce z-30';
+        scrollIndicator.innerHTML = '<i class="fas fa-chevron-down text-2xl"></i>';
+        document.body.appendChild(scrollIndicator);
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                scrollIndicator.style.opacity = '0';
+            } else {
+                scrollIndicator.style.opacity = '1';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
